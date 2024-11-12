@@ -13,12 +13,13 @@ export const authenticateJWT = (req: AuthRequest, res: Response, next: NextFunct
 
         jwt.verify(token, 'secret_key', (err, user) => {
             if (err) {
-                return res.sendStatus(403);
+                return res.status(403).json({ message: 'Forbidden' });
             }
             req.userId = (user as any)?.userId;
             next();
         });
     } else {
-        res.sendStatus(401);
+        res.status(401).json({ message: 'Unauthorized' });
     }
 };
+

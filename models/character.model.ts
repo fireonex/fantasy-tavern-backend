@@ -21,6 +21,11 @@ const CharacterSchema = new mongoose.Schema({
     },
     traits: {
         type: [String],
+        enum: [
+            'Brave', 'Honest', 'Kind', 'Loyal', 'Wise', 'Charismatic', 'Resilient', 'Generous', 'Courageous', 'Compassionate',
+            'Curious', 'Independent', 'Ambitious', 'Reserved', 'Adventurous', 'Cautious', 'Observant', 'Determined', 'Diplomatic', 'Pragmatic',
+            'Arrogant', 'Selfish', 'Greedy', 'Impulsive', 'Stubborn', 'Jealous', 'Vindictive', 'Cowardly', 'Deceitful', 'Lazy'
+        ],
         validate: [(val: string[]) => val.length <= 3, 'You can select up to 3 traits'],
     },
     socialClass: {
