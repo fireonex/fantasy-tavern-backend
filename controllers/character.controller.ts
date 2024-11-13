@@ -1,21 +1,20 @@
 import {Request, Response} from 'express';
 import Character from '../models/character.model';
 
-// Создание персонажа
 export async function createCharacter(req: Request, res: Response): Promise<void> {
     try {
-        const {name, age, gender, traits, socialClass, backstory} = req.body;
+        const { name, age, gender, traits, socialClass, race, backstory } = req.body;
+
         // @ts-ignore
         if (!req.userId) {
-            res.status(401).json({message: 'Unauthorized'});
+            res.status(401).json({ message: 'Unauthorized' });
             return;
         }
 
-        if (!name || !age || !gender || !socialClass) {
-            res.status(400).json({message: 'Please provide all required fields'});
+        if (!name || !age || !gender || !socialClass || !race) {
+            res.status(400).json({ message: 'Please provide all required fields' });
             return;
         }
-
         const newCharacter = new Character({
             // @ts-ignore
             userId: req.userId,
@@ -24,17 +23,18 @@ export async function createCharacter(req: Request, res: Response): Promise<void
             gender,
             traits,
             socialClass,
+            race,
             backstory,
         });
-
         await newCharacter.save();
 
+        // Отправляем ответ
         res.status(201).json({
             characterId: newCharacter._id,
             message: 'Character successfully created',
         });
     } catch (err) {
-        res.status(500).json({message: 'Server error', error: err});
+        res.status(500).json({ message: 'Server error', error: err });
     }
 }
 

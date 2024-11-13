@@ -28,6 +28,11 @@ const CharacterSchema = new mongoose.Schema({
         ],
         validate: [(val: string[]) => val.length <= 3, 'You can select up to 3 traits'],
     },
+    race: {
+        type: String,
+        enum: ['Human', 'High Elf', 'Wood Elf', 'Dwarf', 'Orc'],
+        required: true,
+    },
     socialClass: {
         type: String,
         enum: ['Peasant', 'Warrior', 'Healer', 'Merchant', 'Guard', 'Archer', 'Mage', 'Noble', 'Lord', 'Thief'],
