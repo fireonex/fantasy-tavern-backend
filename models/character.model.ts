@@ -43,6 +43,12 @@ const CharacterSchema = new mongoose.Schema({
         required: false,
         maxlength: [500, 'Backstory cannot exceed 500 symbols'],
     },
+    photo: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'characterPhotos',
+        required: false,
+    },
+
 });
 
 const Character = mongoose.model('Character', CharacterSchema);

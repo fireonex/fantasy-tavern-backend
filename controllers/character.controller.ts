@@ -85,7 +85,6 @@ export async function updateCharacter(req: Request, res: Response): Promise<void
     }
 }
 
-// Удаление персонажа
 export async function deleteCharacter(req: Request, res: Response): Promise<void> {
     try {
         const characterId = req.params.id;
